@@ -21,14 +21,14 @@ jobs:
         uses: docker/login-action@v3.6.0
         with:
           # Server address of Docker registry. If not set then will default to Docker Hub
-          registry: # optional
+          #registry: # optional
           # Username used to log against the Docker registry
           username: pedro0000
           # Password or personal access token used to log against the Docker registry
           password: ${{secrets.PASSWORD_DOCKER_HUB}} # optional
           # Specifies whether the given registry is ECR (auto, true or false)
-          ecr: # optional
+          ecr: FALSE # optional
           # Log out from the Docker registry at the end of a job
-          logout: # optional, default is true
+          logout: TRUE # optional, default is true
           # Raw authentication to registries, defined as YAML objects
           registry-auth: # optional
