@@ -38,7 +38,7 @@ jobs:
       PORT: 5432
       USER: root
       PASSWORD: root
-      DBNAME: localhost
+      DBNAME: root
     strategy:
       matrix:
         os: ["ubuntu-latest", "ubuntu-22.04"]
