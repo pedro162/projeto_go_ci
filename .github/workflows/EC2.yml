@@ -1,0 +1,35 @@
+name: Continous Delivery
+
+on:
+  workflow_call:
+
+jobs:
+  EC2:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ["ubuntu-latest"]
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v5.0.0
+        with:
+          # Name of the artifact to download. If unspecified, all artifacts for the run are downloaded.
+          name: programa_${{ matrix.os }} # optional
+
+      - name: Deploy to Staging server
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: /home/${{ secrets.REMOTE_USER }}
+          EXCLUDE: "/dist/, /node_modules/, /postgres-data/"
+          SCRIPT_BEFORE: |
+            whoami
+            ls -al
+          SCRIPT_AFTER: |
+            whoami
+            ls -al
+            echo $RSYNC_STDOUT
