@@ -10,4 +10,5 @@ jobs:
       matrix:
         os: ["ubuntu-latest"]
     steps:
-    
+    - name: Getting task definition
+      run: aws ecs describe-task-definition --task-definition Task_API-GO --query taskDefinition > task-definition.json
