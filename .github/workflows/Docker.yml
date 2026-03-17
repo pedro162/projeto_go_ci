@@ -49,4 +49,4 @@ jobs:
           file: ./Dockerfile # optional
           # Push is a shorthand for --output=type=registry
           push: true # optional, default is false
-          tags: pedro0000/go_ci:${{github.ref_name}} # optional
+          tags: pedro0000/go_ci:${{github.run_number}} # optional
